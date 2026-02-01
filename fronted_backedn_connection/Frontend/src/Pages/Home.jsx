@@ -1,6 +1,8 @@
 // Home.jsx
 import { useState } from 'react'
 import React from 'react'
+import Navbar2 from "../components/layout/Navbar2";
+
 import './Home.css'
 
 import {
@@ -125,6 +127,16 @@ function KPICard({ title, value, trend, icon: Icon, color, bgColor }) {
   )
 }
 
+const handleOpenAI = () => {
+    console.log("Open AI Assistant");
+    // later: open chatbot drawer / modal
+  };
+
+  const handleAddRequest = () => {
+    console.log("Navigate to Add Request page");
+    // later: navigate("/add-request")
+  };
+
 // Filter Bar Component
 function FilterBar() {
   return (
@@ -213,26 +225,15 @@ export default function Home() {
 
   return (
     <div className="dashboard">
-      {/* Header */}
-      <header className="dashboard-header">
-        <div className="header-content">
-          <div className="header-title">
-            <h1 className="app-title">Service Operations Analytics</h1>
-            <p className="app-subtitle">
-              Monitor service efficiency, workload distribution, and SLA adherence
-            </p>
-          </div>
-          <button
-            className={`refresh-btn-header ${refreshing ? 'refreshing' : ''}`}
-            onClick={handleRefresh}
-          >
-            <RefreshCw size={18} />
-          </button>
-        </div>
+      <Navbar2 
+        onOpenAI={handleOpenAI}
+        onAddRequest={handleAddRequest}
+      />
 
-        {/* Filter Bar */}
-        <FilterBar />
-      </header>
+      {/* Dashboard Content */}
+      <div className="p-6">
+        {/* KPI cards & charts go here */}
+      </div>
 
       {/* KPI Cards */}
       <section className="kpi-section">
