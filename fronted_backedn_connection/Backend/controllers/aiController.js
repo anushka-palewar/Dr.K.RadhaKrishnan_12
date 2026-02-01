@@ -5,18 +5,21 @@
  * Env vars are loaded from SEVADRISHTI/.env automatically. Put there (or in Backend/.env):
  *   GROQ_API_KEY - for SQL generation and result interpretation (agent1, agent4)
  *   DB_HOST, DB_USER, DB_PASSWORD, DB_NAME - for MySQL execution (agent3; database: college_service_db)
- * Ensure SEVADRISHTI has its dependencies: run "npm install" in the SEVADRISHTI folder.
+ * Ensure SEVADRISHTI has its dependencies: run "npm install" in fronted_backedn_connection/SEVADRISHTI.
  */
 
 const path = require("path");
 
+// SEVADRISHTI lives inside fronted_backedn_connection (Backend/controllers -> ../../ = project root)
+const sevadrishtiRoot = path.join(__dirname, "../../SEVADRISHTI");
+
 // Load SEVADRISHTI .env so GROQ_API_KEY and DB_* are available when chatbot runs
 require("dotenv").config({
-  path: path.join(__dirname, "../../../SEVADRISHTI/.env"),
+  path: path.join(sevadrishtiRoot, ".env"),
 });
 
-// Load SEVADRISHTI chatbot from sibling folder (workspace root: Dr.K.RadhaKrishnan_12)
-const chatbotPath = path.join(__dirname, "../../../SEVADRISHTI/chatbot");
+// Load SEVADRISHTI chatbot
+const chatbotPath = path.join(sevadrishtiRoot, "chatbot");
 
 async function chat(req, res, next) {
   const { question } = req.body;

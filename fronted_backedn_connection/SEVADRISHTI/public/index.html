@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Service Operations Analytics Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .chat-container {
+            margin-top: 20px;
+        }
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .response {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+        .sql {
+            font-family: 'Courier New', monospace;
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .examples {
+            margin-top: 20px;
+        }
+        .example-btn {
+            display: inline-block;
+            margin: 5px;
+            padding: 8px 12px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .example-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>College Service Operations Analytics Dashboard</h1>
+        <p>Ask questions about service requests, SLA performance, team efficiency, and more.</p>
+
+        <div class="chat-container">
+            <div class="input-group">
+                <input type="text" id="question" placeholder="Enter your question..." />
+                <button onclick="askQuestion()">Ask</button>
+            </div>
+
+            <div id="response" class="response" style="display: none;"></div>
+        </div>
+
+        <div class="examples">
+            <h3>Example Questions:</h3>
+            <div class="example-btn" onclick="setQuestion('Which team breached SLA the most?')">Which team breached SLA the most?</div>
+            <div class="example-btn" onclick="setQuestion('Average resolution time by category')">Average resolution time by category</div>
+            <div class="example-btn" onclick="setQuestion('SLA trend over time')">SLA trend over time</div>
+            <div class="example-btn" onclick="setQuestion('Which department raises most requests?')">Which department raises most requests?</div>
+            <div class="example-btn" onclick="setQuestion('Which priorities cause delays?')">Which priorities cause delays?</div>
+            <div class="example-btn" onclick="setQuestion('Teams with highest reopen count')">Teams with highest reopen count</div>
+            <div class="example-btn" onclick="setQuestion('Open vs resolved requests')">Open vs resolved requests</div>
+        </div>
+    </div>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById('question').value.trim();
+            if (!question) return;
+
+            const responseDiv = document.getElementById('response');
+            responseDiv.style.display = 'block';
+            responseDiv.innerHTML = '<p>Loading...</p>';
+
+            try {
+                const res = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question })
+                });
+
+                const data = await res.json();
+
+                if (res.status !== 200) {
+                    responseDiv.innerHTML = `<p><strong>Error:</strong> ${data.error}</p>`;
+                    return;
+                }
+
+                let html = `<h4>Question: ${data.question}</h4>`;
+
+                if (data.valid) {
+                    html += `<p><strong>Generated SQL:</strong></p><div class="sql">${data.sql}</div>`;
+                    html += `<p><strong>Result:</strong> ${data.result.success ? `Success (${data.result.count} rows, ${data.result.executionTime}ms)` : `Failed: ${data.result.error}`}</p>`;
+                    
+                    if (data.interpretation && data.interpretation.success) {
+                        html += `<h4>AI Interpretation:</h4>`;
+                        html += `<p><strong>Answer:</strong> ${data.interpretation.answer.direct_answer}</p>`;
+                        if (data.interpretation.answer.supporting_details) {
+                            html += `<p><strong>Details:</strong> ${data.interpretation.answer.supporting_details}</p>`;
+                        }
+                        if (data.interpretation.answer.insights) {
+                            html += `<p><strong>Insights:</strong> ${data.interpretation.answer.insights}</p>`;
+                        }
+                    } else if (data.interpretation) {
+                        html += `<p><strong>Interpretation Error:</strong> ${data.interpretation.error}</p>`;
+                    }
+                    
+                    html += `<p><strong>Legacy Insight:</strong> ${data.insight}</p>`;
+                } else {
+                    html += `<p><strong>Generated SQL:</strong></p><div class="sql">${data.sql}</div>`;
+                    html += `<p><strong>Error:</strong> ${data.insight}</p>`;
+                }
+
+                responseDiv.innerHTML = html;
+            } catch (error) {
+                responseDiv.innerHTML = `<p>Error: ${error.message}</p>`;
+            }
+        }
+
+        function setQuestion(question) {
+            document.getElementById('question').value = question;
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('question').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                askQuestion();
+            }
+        });
+    </script>
+</body>
+</html>
