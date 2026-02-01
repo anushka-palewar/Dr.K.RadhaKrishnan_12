@@ -1,0 +1,33 @@
+import { Routes, Route } from "react-router-dom";
+
+import Login from "../Pages/Login";
+import Register from "../Pages/Register";
+import Home from "../Pages/Home";
+
+
+import ProtectedRoute from "../components/layout/ProtectedRoute";
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      {/* 🔹 Public routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+
+      {/* 🔹 Protected routes */}
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+
+    
+     
+    </Routes>
+  );
+};
+
+export default AppRoutes;
