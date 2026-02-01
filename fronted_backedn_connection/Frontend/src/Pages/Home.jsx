@@ -198,7 +198,7 @@ function AlertCard({ severity, title, message, icon: Icon }) {
       title="Power BI Report"
       width="100%"
       height="100%"
-      src="https://app.powerbi.com/reportEmbed?reportId=940870b6-fa26-45ee-ab1b-03d0882e0893&autoAuth=true&ctid=0ed51ad7-52cc-4234-b54a-76b82d40b5c3"
+      SRC="https://app.powerbi.com/reportEmbed?reportId=dd289c2d-940f-45b0-bb6c-ba7191c9c2eb&autoAuth=true&ctid=0ed51ad7-52cc-4234-b54a-76b82d40b5c3"
       frameBorder="0"
       allowFullScreen={true}
       style={{ borderRadius: '12px', backgroundColor: '#1f2937' }}
