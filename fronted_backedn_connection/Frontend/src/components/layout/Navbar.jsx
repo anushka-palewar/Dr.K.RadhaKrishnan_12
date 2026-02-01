@@ -17,6 +17,22 @@ function Navbar() {
           MyApp
         </Link>
 
+        {/* Center: Navigation links */}
+        <div className="flex items-center gap-2">
+          <Link
+            to="/"
+            className="px-3 py-1.5 rounded text-gray-300 hover:text-white hover:bg-gray-700 text-sm"
+          >
+            Home
+          </Link>
+          <Link
+            to="/ai-assistance"
+            className="px-3 py-1.5 rounded text-gray-300 hover:text-white hover:bg-gray-700 text-sm font-medium"
+          >
+            AI Assistance
+          </Link>
+        </div>
+
         {/* Right: User info + Logout */}
         <div className="flex items-center gap-4">
           <div className="hidden sm:flex flex-col text-right">

@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Home from "../Pages/Home";
-
+import AIAssistance from "../Pages/AIAssistance";
 
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 
@@ -23,9 +23,14 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-
-    
-     
+      <Route
+        path="/ai-assistance"
+        element={
+          <ProtectedRoute>
+            <AIAssistance />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 };
