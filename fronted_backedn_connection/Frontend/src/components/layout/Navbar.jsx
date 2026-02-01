@@ -14,7 +14,7 @@ function Navbar() {
           to="/"
           className="text-lg font-semibold tracking-wide"
         >
-          MyApp
+          SEVA-DRISHTI
         </Link>
 
         {/* Right: User info + Logout */}
