@@ -4,6 +4,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Home from "../Pages/Home";
 import AIAssistance from "../Pages/AIAssistance";
+import AddRequest from "../Pages/AddRequest";
 
 import ProtectedRoute from "../components/layout/ProtectedRoute";
 
@@ -28,6 +29,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <AIAssistance />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/add-request"
+        element={
+          <ProtectedRoute>
+            <AddRequest />
           </ProtectedRoute>
         }
       />

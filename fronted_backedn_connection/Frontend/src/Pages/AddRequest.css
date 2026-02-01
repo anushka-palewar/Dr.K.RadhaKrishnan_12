@@ -1,0 +1,135 @@
+.add-request-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.add-request-header {
+  margin-bottom: 1.5rem;
+}
+
+.add-request-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f9fafb;
+  margin-bottom: 0.25rem;
+}
+
+.add-request-header p {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.add-request-form {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.add-request-error {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.add-request-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row.two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  margin-bottom: 0.35rem;
+}
+
+.form-label.required::after {
+  content: " *";
+  color: #f87171;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #4b5563;
+  background: #111827;
+  color: #f9fafb;
+  font-size: 0.95rem;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #374151;
+}
+
+.btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #2563eb;
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: #374151;
+  color: #e5e7eb;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}

@@ -1,6 +1,7 @@
 // Home.jsx
 import { useState } from 'react'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import Navbar2 from "../components/layout/Navbar2";
 
 import './Home.css'
@@ -127,15 +128,6 @@ function KPICard({ title, value, trend, icon: Icon, color, bgColor }) {
   )
 }
 
-const handleOpenAI = () => {
-    console.log("Open AI Assistant");
-    // later: open chatbot drawer / modal
-  };
-
-  const handleAddRequest = () => {
-    console.log("Navigate to Add Request page");
-    // later: navigate("/add-request")
-  };
 
 // Filter Bar Component
 function FilterBar() {
@@ -217,6 +209,7 @@ function AlertCard({ severity, title, message, icon: Icon }) {
 // Main Dashboard Component (Home)
 export default function Home() {
   const [refreshing, setRefreshing] = useState(false)
+  const navigate = useNavigate()
 
   const handleRefresh = () => {
     setRefreshing(true)
@@ -226,8 +219,8 @@ export default function Home() {
   return (
     <div className="dashboard">
       <Navbar2 
-        onOpenAI={handleOpenAI}
-        onAddRequest={handleAddRequest}
+        onOpenAI={() => navigate('/ai-assistance')}
+        onAddRequest={() => navigate('/add-request')}
       />
 
       {/* Dashboard Content */}

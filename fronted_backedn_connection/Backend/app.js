@@ -5,6 +5,7 @@ const corsMiddleware = require("./MiddleWare/cors_connection");
 const helloRoutes = require("./Routes/helloRoutes");
 const authRoutes = require("./Routes/authRoutes");
 const aiRoutes = require("./Routes/aiRoutes");
+const requestRoutes = require("./Routes/requestRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use("/api", helloRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/requests", requestRoutes);
 
 // 🔹 4. Global error handler
 app.use((err, req, res, next) => {
